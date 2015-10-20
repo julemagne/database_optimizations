@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306023653) do
+ActiveRecord::Schema.define(version: 20151020075139) do
 
   create_table "assemblies", force: :cascade do |t|
     t.string   "name"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20150306023653) do
     t.datetime "updated_at",        null: false
   end
 
+  add_index "genes", ["sequence_id"], name: "index_genes_on_sequence_id"
+
   create_table "hits", force: :cascade do |t|
     t.string   "match_gene_name"
     t.text     "match_gene_dna"
@@ -39,6 +41,8 @@ ActiveRecord::Schema.define(version: 20150306023653) do
     t.datetime "updated_at",         null: false
   end
 
+  add_index "hits", ["subject_id"], name: "index_hits_on_subject_id"
+
   create_table "sequences", force: :cascade do |t|
     t.text     "dna"
     t.text     "quality"
@@ -46,5 +50,7 @@ ActiveRecord::Schema.define(version: 20150306023653) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "sequences", ["assembly_id"], name: "index_sequences_on_assembly_id"
 
 end

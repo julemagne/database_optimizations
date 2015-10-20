@@ -1,5 +1,72 @@
 # Database Optimizations
 
+# Database Optimizations
+
+## Part One: Analysis
+
+* 1. 1627.322047 seconds (27.12 minutes)
+* 3. 1364137ms (22.74 minutes)
+Top:
+Total time before HTML is generated: 1362.012724 s
+Memory used before HTML is generated: 272 MB
+Number of hits: 47636
+Bottom:
+Total time before HTML is generated: 1363.949602 s
+Memory used after HTML is generated: 312 MB
+* 5. AddIndices: migrated 0.5878s
+* 6. Rendered reports/all_data.html.erb within layouts/application (1791.6ms)
+Completed 200 OK in 8974ms (Views: 1976.0ms | ActiveRecord: 1803.8ms)
+Top:
+Total time before HTML is generated: 7.009767 s
+Memory used before HTML is generated: 275 MB
+Number of hits: 47636
+Bottom:
+Total time before HTML is generated: 8.789861 s
+Memory used after HTML is generated: 315 MB
+(With Chrome Timeline open I get 15.92 s
+513.93 ms Loading
+492.18 ms Scripting
+2.15 s Rendering
+1.28 ms Painting
+462.58 ms Other
+12.30 s Idle)
+
+### Percent improvement:
+
+* Total time before HTML is generated:
+(1364.137s/7.009767s)*100=19461% faster
+
+8. Rendered reports/all_data.html.erb within layouts/application (1679.8ms)
+Completed 200 OK in 10133ms (Views: 1724.7ms | ActiveRecord: 1038.3ms)
+Top:
+Total time before HTML is generated: 5.726693 s
+Memory used before HTML is generated: 1979 MB
+Number of hits: 47636
+Bottom:
+Total time before HTML is generated: 7.377159 s
+Memory used after HTML is generated: 1985 MB
+
+### Percent improvement:
+
+* Total time before HTML is generated:
+(1364.137s/5.726693s)*100=23821% faster
+
+but sometimes it takes way longer, like 15 seconds ???
+
+9. 1765.722618 seconds (29.4287103 minutes)
+1765.722618/1627.322047=1.08504805257
+8.5% worse
+
+10.(a) running rake db:seed without indices and then running a migration to add indices is faster.
+
+development.sqlite3 is 29kb
+development.log is 1.8mb
+
+This is probably smaller than the databases I would use in my career.
+Reloading the page makes memory usage go up. Memory used keeps going up until I drop the database. Then it goes back down to ~the original size.
+
+
+
 ## Description
 
 Given an existing application which generates a report from a large data set, improve the efficiency of the report using database optimization methods.

@@ -1,6 +1,10 @@
 class ReportsController < ApplicationController
   helper_method :memory_in_mb
 
+  def search
+
+  end
+
   def all_data
     @start_time = Time.now
 
@@ -17,7 +21,7 @@ class ReportsController < ApplicationController
         end
       end
     end
-    @hits.sort! {|a, b| b.percent_similarity <=> a.percent_similarity}
+    @hits.sort_by!(&:percent_similarity).reverse!
 
     @memory_used = memory_in_mb
   end

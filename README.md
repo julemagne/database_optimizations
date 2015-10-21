@@ -1,7 +1,5 @@
 # Database Optimizations
 
-# Database Optimizations
-
 ## Part One: Analysis
 
 * 1. 1627.322047 seconds (27.12 minutes)
@@ -56,11 +54,14 @@ but sometimes it takes way longer, like 15 seconds ???
 9. 1765.722618 seconds (29.4287103 minutes)
 1765.722618/1627.322047=1.08504805257
 8.5% worse
+There was more to write.
 
 10.(a) running rake db:seed without indices and then running a migration to add indices is faster.
 
-development.sqlite3 is 29kb
-development.log is 1.8mb
+Database size:
+development.sqlite3 is 569.7 MB
+Development log size:
+development.log is 1.54 GB
 
 This is probably smaller than the databases I would use in my career.
 Reloading the page makes memory usage go up. Memory used keeps going up until I drop the database. Then it goes back down to ~the original size.

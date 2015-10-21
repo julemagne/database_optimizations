@@ -1,0 +1,29 @@
+<p>Total time before HTML is generated: <%= Time.now - @start_time %> s</p>
+<p>Memory used before HTML is generated: <%= @memory_used %> MB</p>
+<p>Number of hits: <%= @hits.length %></p>
+
+<h1>Search All Expenses</h1>
+<%= form_tag search_path, method: :get do %>
+<%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search" %>
+  <% if @hits %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @hits.each do |h| %>
+        <tr>
+          <td> h.name </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% else %>
+  Please enter a search term to see results.
+  <% end %>
+<% end %>
+<p>Total time before HTML is generated: <%= Time.now - @start_time %> s</p>
+<p>Memory used after HTML is generated: <%= memory_in_mb %> MB</p>

@@ -1,12 +1,31 @@
 Rails.application.routes.draw do
   get 'reports/all_data'
-
+  get 'search' => 'reports#search'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'reports#all_data'
-
+  resources :hits do
+    collection do
+      get 'search'
+    end
+  end
+  resources :assemblies do
+    collection do
+      get 'search'
+    end
+  end
+  resources :genes do
+    collection do
+      get 'search'
+    end
+  end
+  resources :sequences do
+    collection do
+      get 'search'
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

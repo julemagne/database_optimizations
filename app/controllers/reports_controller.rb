@@ -11,24 +11,21 @@ class ReportsController < ApplicationController
   def all_data
     @start_time = Time.now
 
-    @sequences = []
-    @genes = []
-    @hits = []
     @assembly = Assembly.find_by_name(params[:name])
-    @assembly.sequences.each do |s|
-      @sequences << s
-      s.genes.each do |g|
-        @genes << g
-        g.hits.each do |h|
-          @hits << h
-        end
-      end
-    end
-    # @hits<<Hit.where(subject_id: Gene.id.where(sequence_id: Sequence.id.where(assembly_id: (Assembly.find_by_name(params[:name]).id))))
+    # @assembly.sequences.each do |s|
+    #   @sequences << s
+    #   s.genes.each do |g|
+    #     @genes << g
+    #     g.hits.each do |h|
+    #       @hits << h
+    #     end
+    #   end
+    # end
+    @hits=Hit.where(subject: Gene.where(sequence: Sequence.where(assembly: @assembly))).order(percent_similarity: :desc)
     # @assembly.includes(:sequences, { genes: { hits: :all } }).each do |a|
     #   @hits<<a
     # end
-    @hits.sort_by!(&:percent_similarity).reverse!
+    # @hits.sort_by!(&:percent_similarity).reverse!
 
     @memory_used = memory_in_mb
   end

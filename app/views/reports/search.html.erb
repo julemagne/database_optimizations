@@ -1,12 +1,12 @@
-<p>Total time before HTML is generated: <%= Time.now - @start_time %> s</p>
-<p>Memory used before HTML is generated: <%= @memory_used %> MB</p>
-<p>Number of hits: <%= @hits.length %></p>
 
 <h1>Search</h1>
 <%= form_tag search_path, method: :get do %>
 <%= text_field_tag :search, params[:search] %>
   <%= submit_tag "Search" %>
-  <% if @hits %>
+  <% if params[:search] %>
+  <p>Total time before HTML is generated: <%= Time.now - @start_time %> s</p>
+  <p>Memory used before HTML is generated: <%= @memory_used %> MB</p>
+  <p>Number of hits: <%= @hits.length %></p>
   <table>
     <thead>
       <tr>

@@ -3,8 +3,12 @@ class ReportsController < ApplicationController
 
   def search
     @start_time = Time.now
-    q = "%#{params[:search]}%"
-      @hits = Hit.joins(subject: {sequence: :assembly}).where("gene.gene LIKE ? OR hits.match_gene_name LIKE ? OR assemblies.name LIKE ?", q, q, q)
+    if params[:search]
+      q = "%#{params[:search]}%"
+        @hits = Hit.where("hits.match_gene_name LIKE ?", q)
+        @hits += Hit.where(subject: Gene.joins(sequence: :assembly).where("genes.dna LIKE ? OR assemblies.name LIKE ?", q, q))
+    else
+    end
     @memory_used = memory_in_mb
   end
 

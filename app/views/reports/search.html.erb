@@ -2,7 +2,7 @@
 <p>Memory used before HTML is generated: <%= @memory_used %> MB</p>
 <p>Number of hits: <%= @hits.length %></p>
 
-<h1>Search All Expenses</h1>
+<h1>Search</h1>
 <%= form_tag search_path, method: :get do %>
 <%= text_field_tag :search, params[:search] %>
   <%= submit_tag "Search" %>
@@ -10,13 +10,17 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
+        <th>Matching Gene Name</th>
+        <th>Matching DNA</th>
+        <th>Percent Similarity</th>
       </tr>
     </thead>
     <tbody>
       <% @hits.each do |h| %>
         <tr>
-          <td> h.name </td>
+          <td><%= h.match_gene_name %></td>
+          <td><%= h.match_gene_dna.first(100) %></td>
+          <td><%= h.percent_similarity %></td>
         </tr>
       <% end %>
     </tbody>

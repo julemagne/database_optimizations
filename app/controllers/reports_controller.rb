@@ -1,6 +1,13 @@
 class ReportsController < ApplicationController
   helper_method :memory_in_mb
 
+  def upload
+    uploaded_io = params[:csv]
+    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+  end
+
   def search
     @start_time = Time.now
     if params[:search]

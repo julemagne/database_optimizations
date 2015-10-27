@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+gem 'delayed_job_active_record'
+gem 'daemons'
 gem 'faker'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

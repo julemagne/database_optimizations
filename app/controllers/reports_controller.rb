@@ -3,7 +3,7 @@ class ReportsController < ApplicationController
   helper_method :memory_in_mb
 
   def perform_upload
-    Report.import(params[:file].tempfile)
+    MakeCsvJob.perform_later(params[:file].path)
     flash[:success] = "Uploaded successfully"
     redirect_to action: :upload
   end

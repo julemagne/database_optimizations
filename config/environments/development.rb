@@ -22,7 +22,6 @@ Rails.application.configure do
     address:              'smtp.mailgun.org',
     user_name:            ENV["MAILGUN_USERNAME"],
     password:             ENV["MAILGUN_PASSWORD"],
-    domain:               ENV["MAILGUN_DOMAIN"],
     authentication:       'plain',
     enable_starttls_auto: true  }
   # Print deprecation notices to the Rails logger.

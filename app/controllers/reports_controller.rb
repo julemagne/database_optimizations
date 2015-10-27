@@ -38,15 +38,13 @@ class ReportsController < ApplicationController
   end
 
   def index
-    unless params[:name]
-      render :sent_report
-      return
-    end
-    @name = params[:name]
-    if params[:email]
+    if params[:email] && params[:name]
       @email = params[:email]
+      @name = params[:name]
       ReportMailer.report_data(@email, @name).deliver_later
+      render :sent_report
     else
+
     end
   end
 

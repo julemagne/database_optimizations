@@ -1,5 +1,6 @@
 Please enter your email to be delivered the results of your filter.
 <%= form_tag reports_path, method: :get do %>
   Email Address: <%= text_field_tag :email %>
+  Assembly Name: <%= text_field_tag :name %>
   <%= submit_tag "Submit" %>
 <% end %>

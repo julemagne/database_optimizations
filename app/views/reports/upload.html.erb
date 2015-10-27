@@ -1,5 +1,10 @@
-Upload your CSV file here:
-<%= form_tag({action: :upload}, multipart: true) do %>
-  <%= file_field_tag 'csv' %>
-  <%= submit_tag("Upload") %>
+<% if params[:file] %>
+Upload success
+<% else %>
+  Upload your CSV file here:
+  <%= form_tag perform_upload_reports_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+  <% end %>
+
 <% end %>

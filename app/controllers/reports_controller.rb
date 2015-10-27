@@ -1,11 +1,17 @@
+require 'csv'
 class ReportsController < ApplicationController
   helper_method :memory_in_mb
 
+  def perform_upload
+    Report.import(params[:file].tempfile)
+    flash[:success] = "Uploaded successfully"
+    redirect_to action: :upload
+  end
+
   def upload
-    uploaded_io = params[:csv]
-    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
-      file.write(uploaded_io.read)
-    end
+  end
+
+  def submit
   end
 
   def search
@@ -19,7 +25,11 @@ class ReportsController < ApplicationController
     @memory_used = memory_in_mb
   end
 
-  def all_data
+  def index
+    unless params[:name]
+      render :blank
+      return
+    end
     @start_time = Time.now
 
     @assembly = Assembly.find_by_name(params[:name])

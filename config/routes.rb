@@ -1,15 +1,13 @@
 Rails.application.routes.draw do
-  get 'reports/all_data'
-  get 'search' => 'reports#search'
-  get 'upload' => 'reports#upload'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'reports#all_data'
-  resources :hits do
+  resources :reports, path: '/' do
     collection do
-      get 'search'
+     get :search
+     get :upload
+     post :perform_upload
     end
   end
   resources :assemblies do

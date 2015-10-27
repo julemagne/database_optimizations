@@ -27,28 +27,15 @@ class ReportsController < ApplicationController
 
   def index
     unless params[:name]
-      render :blank
+      render :sent_report
       return
     end
-    @start_time = Time.now
-
-    @assembly = Assembly.find_by_name(params[:name])
-    # @assembly.sequences.each do |s|
-    #   @sequences << s
-    #   s.genes.each do |g|
-    #     @genes << g
-    #     g.hits.each do |h|
-    #       @hits << h
-    #     end
-    #   end
-    # end
-    @hits=Hit.where(subject: Gene.where(sequence: Sequence.where(assembly: @assembly))).order(percent_similarity: :desc)
-    # @assembly.includes(:sequences, { genes: { hits: :all } }).each do |a|
-    #   @hits<<a
-    # end
-    # @hits.sort_by!(&:percent_similarity).reverse!
-
-    @memory_used = memory_in_mb
+    @name = params[:name]
+    if params[:email]
+      @email = params[:email]
+      ReportMailer.report_data(@email, @name).deliver_later
+    else
+    end
   end
 
   private def memory_in_mb

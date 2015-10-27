@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027011924) do
+ActiveRecord::Schema.define(version: 20151027174557) do
 
   create_table "assemblies", force: :cascade do |t|
     t.string   "name"
@@ -60,8 +60,12 @@ ActiveRecord::Schema.define(version: 20151027011924) do
   add_index "hits", ["subject_id"], name: "index_hits_on_subject_id"
 
   create_table "reports", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "uploaded_file_file_name"
+    t.string   "uploaded_file_content_type"
+    t.integer  "uploaded_file_file_size"
+    t.datetime "uploaded_file_updated_at"
   end
 
   create_table "sequences", force: :cascade do |t|

@@ -1,0 +1,7 @@
+Save your CSV file to the database:
+<%= form_for(@report, html: multipart: true do |f|) %>
+  <div class="field">
+  <%= f.label :uploaded_file %>
+  <%= f.file_field :uploaded_file %>
+  </div>
+<% end %>

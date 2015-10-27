@@ -11,6 +11,18 @@ class ReportsController < ApplicationController
   def upload
   end
 
+  def edit
+    @report = Report.first
+  end
+
+  def update
+    @report.update(report_params)
+    render 'show'
+  end
+
+  def show
+  end
+
   def submit
   end
 
@@ -38,7 +50,13 @@ class ReportsController < ApplicationController
     end
   end
 
-  private def memory_in_mb
+  private
+
+  def report_params
+    params.permit(:uploaded_file)
+  end
+
+  def memory_in_mb
     `ps -o rss -p #{$$}`.strip.split.last.to_i / 1024
   end
 end

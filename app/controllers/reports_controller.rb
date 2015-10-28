@@ -41,6 +41,7 @@ class ReportsController < ApplicationController
     if params[:email] && params[:name]
       @email = params[:email]
       @name = params[:name]
+      MakeCsvForEmailJob.perform_later(@name)
       ReportMailer.report_data(@email, @name).deliver_later
       render :sent_report
     else

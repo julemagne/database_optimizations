@@ -1,4 +1,6 @@
 class Report < ActiveRecord::Base
+  has_attached_file :uploaded_file
+  validates_attachment_content_type :uploaded_file, content_type: "text/csv", "text/html"
 
   def self.import(path) #perform insted of import for ActiveJob
     CSV.foreach(path, headers: true) do |r|

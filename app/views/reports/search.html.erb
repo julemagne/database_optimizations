@@ -10,7 +10,6 @@
   <table>
     <thead>
       <tr>
-        <th>Subject Type</th>
         <th>Matching Gene Name</th>
         <th>Matching DNA</th>
         <th>Percent Similarity</th>
@@ -19,7 +18,6 @@
     <tbody>
       <% @hits.each do |h| %>
         <tr>
-          <td><%= h.subject_type %></td>
           <td><%= h.match_gene_name %></td>
           <td><%= h.match_gene_dna.first(100) %></td>
           <td><%= h.percent_similarity %></td>
